@@ -3,7 +3,6 @@ package com.kotovdv.algorithms.sorting.implementations
 import com.kotovdv.algorithms.sorting.SortingAlgorithm
 
 class InsertionSort : SortingAlgorithm {
-
     override fun sort(array: Array<Int>) {
         for (j in 1 until array.size) {
             val key = array[j]
