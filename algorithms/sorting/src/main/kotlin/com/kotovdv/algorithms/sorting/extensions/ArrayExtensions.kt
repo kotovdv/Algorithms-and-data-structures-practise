@@ -19,3 +19,10 @@ fun <T> Array<T>.moveElement(from: Int, to: Int) {
 
     this[to] = temp
 }
+
+fun <T> Array<T>.split(index: Int): Pair<Array<T>, Array<T>> {
+    return Pair(
+            this.sliceArray(0 until index),
+            this.sliceArray(index until this.size)
+    )
+}
