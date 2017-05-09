@@ -3,7 +3,7 @@ package com.kotovdv.algorithms.sorting.implementations
 import com.kotovdv.algorithms.sorting.SortingAlgorithm
 import com.kotovdv.algorithms.sorting.extensions.split
 
-class MergeSort : SortingAlgorithm {
+open class MergeSort : SortingAlgorithm {
     override fun sort(array: Array<Int>) {
         System.arraycopy(doSort(array), 0, array, 0, array.size)
     }
@@ -20,7 +20,7 @@ class MergeSort : SortingAlgorithm {
         return merge(leftPart, rightPart)
     }
 
-    private fun merge(left: Array<Int>, right: Array<Int>): Array<Int> {
+    protected fun merge(left: Array<Int>, right: Array<Int>): Array<Int> {
         val size = left.size + right.size
         val mergedArray = arrayOfNulls<Int>(size)
 
