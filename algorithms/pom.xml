@@ -14,5 +14,6 @@
 
     <modules>
         <module>sorting</module>
+        <module>various</module>
     </modules>
 </project>
