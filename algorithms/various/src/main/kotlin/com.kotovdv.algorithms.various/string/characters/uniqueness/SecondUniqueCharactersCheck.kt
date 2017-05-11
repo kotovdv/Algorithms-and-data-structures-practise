@@ -1,4 +1,4 @@
-package com.kotovdv.algorithms.various.string
+package com.kotovdv.algorithms.various.string.characters.uniqueness
 
 class SecondUniqueCharactersCheck : UniqueCharactersCheck {
 

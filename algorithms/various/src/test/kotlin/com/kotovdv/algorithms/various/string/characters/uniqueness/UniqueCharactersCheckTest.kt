@@ -1,4 +1,4 @@
-package com.kotovdv.algorithms.various.string
+package com.kotovdv.algorithms.various.string.characters.uniqueness
 
 import com.tngtech.java.junit.dataprovider.DataProvider
 import com.tngtech.java.junit.dataprovider.DataProviderRunner
