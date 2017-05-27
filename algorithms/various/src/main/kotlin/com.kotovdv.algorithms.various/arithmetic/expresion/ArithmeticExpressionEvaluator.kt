@@ -1,7 +1,6 @@
 package com.kotovdv.algorithms.various.arithmetic.expresion
 
 import java.math.BigDecimal
-import java.util.*
 
 /**
  * @author Dmitriy Kotov
@@ -9,31 +8,24 @@ import java.util.*
 
 class ArithmeticExpressionEvaluator {
 
-    private val infixToPostfixTransformer = InfixToPostfixNotationTransformer()
+    private val postfixNotationTransformer = InfixToPostfixNotationTransformer()
+    private val postfixNotationCalculator = PostfixNotationExpressionCalculator()
+    private val OPERATORS = "(" + Operator.values()
+            .map { operator -> "\\" + operator.representation }
+            .joinToString(separator = "|") +
+            ")"
 
     fun evaluate(expression: String): BigDecimal {
-        val tokens = expression.split(regex = Regex("\\s+"))
-        val postfixNotationExpression: Iterable<String> = infixToPostfixTransformer.transform(tokens)
+        val tokens = splitToTokens(expression)
+        val postfixNotationExpression = postfixNotationTransformer.transform(tokens)
 
-        return BigDecimal(calculate(postfixNotationExpression))
+        return BigDecimal(postfixNotationCalculator.calculate(postfixNotationExpression))
     }
 
-    private fun calculate(postfixNotationExpression: Iterable<String>): String {
-        val stack: Deque<String> = LinkedList<String>()
-
-        for (token in postfixNotationExpression) {
-            val operator = Operator.find(token)
-            if (operator != null) {
-                val rightOperand = stack.pop()
-                val leftOperand = stack.pop()
-
-                val resultingValue = operator.apply(leftOperand, rightOperand)
-                stack.push(resultingValue)
-            } else {
-                stack.push(token)
-            }
-        }
-
-        return stack.pop()
+    private fun splitToTokens(expression: String): List<String> {
+        return expression
+                .replace(regex = Regex(OPERATORS), replacement = " $1 ")
+                .split(regex = Regex("\\s+"))
     }
+
 }

@@ -20,11 +20,14 @@ class ArithmeticExpressionEvaluatorTest {
         fun scenarios(): Array<Array<Any>> {
             return arrayOf(
                     arrayOf("1 + 1", BigDecimal(2)),
+                    arrayOf("1+1", BigDecimal(2)),
                     arrayOf("1 - 1", BigDecimal(0)),
+                    arrayOf("1-1", BigDecimal(0)),
                     arrayOf("2 * 2", BigDecimal(4)),
                     arrayOf("2 / 2", BigDecimal(1)),
                     arrayOf("1 + 1 * 2", BigDecimal(3)),
-                    arrayOf("2 * 2 + 2 * 2", BigDecimal(8))
+                    arrayOf("2 * 2 + 2 * 2", BigDecimal(8)),
+                    arrayOf("2*2+2*2", BigDecimal(8))
             )
         }
     }
