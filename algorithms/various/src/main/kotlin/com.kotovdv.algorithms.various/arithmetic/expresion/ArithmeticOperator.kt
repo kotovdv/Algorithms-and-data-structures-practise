@@ -6,7 +6,7 @@ import java.math.BigDecimal
 /**
  * @author Dmitriy Kotov
  */
-enum class Operator(val representation: String) {
+enum class ArithmeticOperator(val representation: String) {
     PLUS("+") {
         override fun apply(leftOperand: String, rightOperand: String): String {
             return BigDecimal(leftOperand).plus(BigDecimal(rightOperand)).toString()
@@ -31,14 +31,14 @@ enum class Operator(val representation: String) {
     abstract fun apply(leftOperand: String, rightOperand: String): String
 
     companion object {
-        fun find(representation: String): Operator? {
+        fun find(representation: String): ArithmeticOperator? {
             values().filter { it.representation == representation }
                     .forEach { return it }
 
             return null
         }
 
-        fun get(representation: String): Operator {
+        fun get(representation: String): ArithmeticOperator {
             return find(representation) ?: throw NoOperatorFoundException(representation)
         }
     }

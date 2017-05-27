@@ -1,5 +1,6 @@
 package com.kotovdv.algorithms.various.arithmetic.expresion
 
+import com.kotovdv.algorithms.various.arithmetic.expresion.ArithmeticOperator.*
 import java.util.*
 
 /**
@@ -11,10 +12,10 @@ import java.util.*
 class InfixToPostfixNotationTransformer {
 
     private val operatorsPrecedence: Map<String, Int> = hashMapOf(
-            Operator.PLUS.representation to 0,
-            Operator.MINUS.representation to 0,
-            Operator.MULTIPLY.representation to 1,
-            Operator.DIVIDE.representation to 1
+            PLUS.representation to 0,
+            MINUS.representation to 0,
+            MULTIPLY.representation to 1,
+            DIVIDE.representation to 1
     )
 
     fun transform(tokens: Iterable<String>): Iterable<String> {

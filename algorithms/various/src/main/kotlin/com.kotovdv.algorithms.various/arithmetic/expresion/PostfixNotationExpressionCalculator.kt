@@ -11,7 +11,7 @@ class PostfixNotationExpressionCalculator {
         val stack: Deque<String> = LinkedList<String>()
 
         for (token in postfixNotationExpression) {
-            val operator = Operator.find(token)
+            val operator = ArithmeticOperator.find(token)
             if (operator != null) {
                 val rightOperand = stack.pop()
                 val leftOperand = stack.pop()
