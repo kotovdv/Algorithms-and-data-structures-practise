@@ -35,15 +35,15 @@ enum class ArithmeticOperator(val representation: String, val precedence: Int) {
             return find(representation) != null
         }
 
+        fun get(representation: String): ArithmeticOperator {
+            return find(representation) ?: throw NoOperatorFoundException(representation)
+        }
+
         fun find(representation: String): ArithmeticOperator? {
             values().filter { it.representation == representation }
                     .forEach { return it }
 
             return null
-        }
-
-        fun get(representation: String): ArithmeticOperator {
-            return find(representation) ?: throw NoOperatorFoundException(representation)
         }
     }
 }

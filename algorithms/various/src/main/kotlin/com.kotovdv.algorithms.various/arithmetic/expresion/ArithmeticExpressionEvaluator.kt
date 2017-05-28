@@ -9,9 +9,13 @@ class ArithmeticExpressionEvaluator {
 
     private val postfixNotationTransformer = InfixToPostfixNotationTransformer()
     private val postfixNotationCalculator = PostfixNotationExpressionCalculator()
-    private val OPERATORS = "(" + ArithmeticOperator.values()
-            .map { operator -> "\\" + operator.representation }
-            .joinToString(separator = "|") + "|\\(|" + "\\)" +
+
+    /** Regex for all supported arithmetic operators and left and right bracket symbols **/
+    private val OPERATORS = "(" +
+            ArithmeticOperator.values()
+                    .map { operator -> "\\" + operator.representation }
+                    .joinToString(separator = "|") +
+            "|\\(|" + "\\)" +
             ")"
 
     fun evaluate(expression: String): BigDecimal {
