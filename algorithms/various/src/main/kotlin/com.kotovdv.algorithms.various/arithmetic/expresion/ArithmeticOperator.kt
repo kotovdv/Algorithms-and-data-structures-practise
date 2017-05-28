@@ -31,6 +31,10 @@ enum class ArithmeticOperator(val representation: String, val precedence: Int) {
     abstract fun apply(leftOperand: String, rightOperand: String): String
 
     companion object {
+        fun isArithmeticOperator(representation: String): Boolean {
+            return find(representation) != null
+        }
+
         fun find(representation: String): ArithmeticOperator? {
             values().filter { it.representation == representation }
                     .forEach { return it }

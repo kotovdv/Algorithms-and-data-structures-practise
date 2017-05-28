@@ -3,7 +3,7 @@ package com.kotovdv.algorithms.various.arithmetic.expresion
 import com.tngtech.java.junit.dataprovider.DataProvider
 import com.tngtech.java.junit.dataprovider.DataProviderRunner
 import com.tngtech.java.junit.dataprovider.UseDataProvider
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -32,6 +32,6 @@ class InfixToPostfixNotationTransformerTest {
     @Test
     @UseDataProvider("positiveScenarios")
     fun testTransformation(input: Iterable<String>, output: Iterable<String>) {
-        Assertions.assertThat(transformer.transform(input)).isEqualTo(output)
+        assertThat(transformer.transform(input)).isEqualTo(output)
     }
 }

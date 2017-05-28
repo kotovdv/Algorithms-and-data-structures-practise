@@ -1,5 +1,6 @@
 package com.kotovdv.algorithms.various.arithmetic.expresion
 
+import com.kotovdv.algorithms.various.arithmetic.expresion.ArithmeticOperator.Companion.isArithmeticOperator
 import com.kotovdv.algorithms.various.exception.arithmetic.expression.BracketsMismatchException
 import java.util.*
 
@@ -18,7 +19,7 @@ class InfixToPostfixNotationTransformer {
         for (token in tokens) {
             if (isRoundBracket(token)) {
                 handleRoundBracket(token, operatorsStack, outputQueue)
-            } else if (isOperator(token)) {
+            } else if (isArithmeticOperator(token)) {
                 handleOperator(token, operatorsStack, outputQueue)
             } else {
                 handleNumber(token, outputQueue)
@@ -29,19 +30,8 @@ class InfixToPostfixNotationTransformer {
         return outputQueue
     }
 
-    private fun flushOperators(operatorsStack: Deque<String>, outputQueue: Queue<String>) {
-        while (!operatorsStack.isEmpty()) {
-            val nextOperator = operatorsStack.pop()
-            if (isRoundBracket(nextOperator)) {
-                throw BracketsMismatchException()
-            }
-
-            outputQueue.offer(nextOperator)
-        }
-    }
-
     private fun handleRoundBracket(token: String, operatorsStack: Deque<String>, outputQueue: Queue<String>) {
-        if (isLeftBracket(token)) {
+        if (token == "(") {
             operatorsStack.push(token)
         } else {
             while (operatorsStack.size > 0 && operatorsStack.peek() != "(") {
@@ -71,17 +61,22 @@ class InfixToPostfixNotationTransformer {
         outputQueue.offer(token)
     }
 
-    private fun isOperator(token: String): Boolean {
-        return ArithmeticOperator.find(token) != null
+    private fun flushOperators(operatorsStack: Deque<String>, outputQueue: Queue<String>) {
+        while (!operatorsStack.isEmpty()) {
+            val nextOperator = operatorsStack.pop()
+            if (isRoundBracket(nextOperator)) {
+                throw BracketsMismatchException()
+            }
+
+            outputQueue.offer(nextOperator)
+        }
+    }
+
+    private fun isRoundBracket(token: String): Boolean {
+        return ")" == token || "(" == token
     }
 
     private fun isStackOperatorMorePrioritized(stackOperator: String, token: String): Boolean {
         return ArithmeticOperator.get(stackOperator).precedence > ArithmeticOperator.get(token).precedence
-    }
-
-    private fun isLeftBracket(token: String) = token == "("
-
-    private fun isRoundBracket(token: String): Boolean {
-        return ")" == token || "(" == token
     }
 }
