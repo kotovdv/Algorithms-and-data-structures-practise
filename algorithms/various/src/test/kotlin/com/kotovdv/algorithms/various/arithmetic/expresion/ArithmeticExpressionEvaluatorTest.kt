@@ -14,7 +14,6 @@ import java.math.BigDecimal
  */
 @RunWith(DataProviderRunner::class)
 class ArithmeticExpressionEvaluatorTest {
-
     companion object {
         @JvmStatic
         @DataProvider
@@ -44,7 +43,7 @@ class ArithmeticExpressionEvaluatorTest {
                     arrayOf("1 + 1)"),
                     arrayOf("((1 + 1)"),
                     arrayOf("(((1 + 1)+5)")
-                    )
+            )
         }
     }
 
@@ -52,7 +51,7 @@ class ArithmeticExpressionEvaluatorTest {
 
     @Test
     @UseDataProvider("positiveScenarios")
-    fun evaluate(expression: String, result: BigDecimal) {
+    fun testEvaluation(expression: String, result: BigDecimal) {
         assertThat(evaluator.evaluate(expression)).isEqualTo(result)
     }
 

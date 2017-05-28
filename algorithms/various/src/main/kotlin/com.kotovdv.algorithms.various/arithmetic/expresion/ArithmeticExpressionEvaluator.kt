@@ -5,7 +5,6 @@ import java.math.BigDecimal
 /**
  * @author Dmitriy Kotov
  */
-
 class ArithmeticExpressionEvaluator {
 
     private val postfixNotationTransformer = InfixToPostfixNotationTransformer()

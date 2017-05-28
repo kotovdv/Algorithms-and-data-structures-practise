@@ -1,6 +1,5 @@
 package com.kotovdv.algorithms.various.arithmetic.expresion
 
-import com.kotovdv.algorithms.various.arithmetic.expresion.ArithmeticOperator.*
 import com.kotovdv.algorithms.various.exception.arithmetic.expression.BracketsMismatchException
 import java.util.*
 
@@ -12,16 +11,10 @@ import java.util.*
  */
 class InfixToPostfixNotationTransformer {
 
-    private val operatorsPrecedence: Map<String, Int> = hashMapOf(
-            PLUS.representation to 0,
-            MINUS.representation to 0,
-            MULTIPLY.representation to 1,
-            DIVIDE.representation to 1
-    )
-
     fun transform(tokens: Iterable<String>): Iterable<String> {
         val outputQueue: Queue<String> = LinkedList<String>()
         val operatorsStack: Deque<String> = LinkedList<String>()
+
         for (token in tokens) {
             if (isRoundBracket(token)) {
                 handleRoundBracket(token, operatorsStack, outputQueue)
@@ -79,11 +72,11 @@ class InfixToPostfixNotationTransformer {
     }
 
     private fun isOperator(token: String): Boolean {
-        return operatorsPrecedence.containsKey(token)
+        return ArithmeticOperator.find(token) != null
     }
 
     private fun isStackOperatorMorePrioritized(stackOperator: String, token: String): Boolean {
-        return operatorsPrecedence[stackOperator]!! > operatorsPrecedence[token]!!
+        return ArithmeticOperator.get(stackOperator).precedence > ArithmeticOperator.get(token).precedence
     }
 
     private fun isLeftBracket(token: String) = token == "("

@@ -6,23 +6,23 @@ import java.math.BigDecimal
 /**
  * @author Dmitriy Kotov
  */
-enum class ArithmeticOperator(val representation: String) {
-    PLUS("+") {
+enum class ArithmeticOperator(val representation: String, val precedence: Int) {
+    PLUS("+", 0) {
         override fun apply(leftOperand: String, rightOperand: String): String {
             return BigDecimal(leftOperand).plus(BigDecimal(rightOperand)).toString()
         }
     },
-    MINUS("-") {
+    MINUS("-", 0) {
         override fun apply(leftOperand: String, rightOperand: String): String {
             return BigDecimal(leftOperand).minus(BigDecimal(rightOperand)).toString()
         }
     },
-    MULTIPLY("*") {
+    MULTIPLY("*", 1) {
         override fun apply(leftOperand: String, rightOperand: String): String {
             return BigDecimal(leftOperand).multiply(BigDecimal(rightOperand)).toString()
         }
     },
-    DIVIDE("/") {
+    DIVIDE("/", 1) {
         override fun apply(leftOperand: String, rightOperand: String): String {
             return BigDecimal(leftOperand).divide(BigDecimal(rightOperand)).toString()
         }
