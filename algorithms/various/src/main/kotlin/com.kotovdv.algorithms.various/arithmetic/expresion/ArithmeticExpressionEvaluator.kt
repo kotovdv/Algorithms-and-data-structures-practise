@@ -12,7 +12,7 @@ class ArithmeticExpressionEvaluator {
     private val postfixNotationCalculator = PostfixNotationExpressionCalculator()
     private val OPERATORS = "(" + ArithmeticOperator.values()
             .map { operator -> "\\" + operator.representation }
-            .joinToString(separator = "|") +
+            .joinToString(separator = "|") + "|\\(|" + "\\)" +
             ")"
 
     fun evaluate(expression: String): BigDecimal {
@@ -25,6 +25,7 @@ class ArithmeticExpressionEvaluator {
     private fun tokenize(expression: String): List<String> {
         return expression
                 .replace(regex = Regex(OPERATORS), replacement = " $1 ")
+                .trim()
                 .split(regex = Regex("\\s+"))
     }
 
